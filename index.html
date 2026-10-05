@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Franz Motzkus, Applied AI engineer and PhD researcher in explainable AI for autonomous driving. Berlin.">
+<title>Franz Motzkus</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: single narrow column, hero = statement + live concept-relevance map, then work, research, experience, contact */
+:root {
+  --bg: #F5F6F8;
+  --surface: #FFFFFF;
+  --fg: #14171F;
+  --muted: #5B6273;
+  --line: #DDE0E7;
+  --accent: #2F48C8;
+  --warm: #D9891A;
+  --display: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
+  --body: "IBM Plex Sans", -apple-system, "Segoe UI", Roboto, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0F1117; --surface: #171A23; --fg: #E8EAF0; --muted: #9AA1B2;
+    --line: #2A2F3C; --accent: #8EA2FF; --warm: #F0A73A; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0F1117; --surface: #171A23; --fg: #E8EAF0; --muted: #9AA1B2;
+  --line: #2A2F3C; --accent: #8EA2FF; --warm: #F0A73A; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--fg);
+  font: 400 16px/1.6 var(--body);
+  -webkit-font-smoothing: antialiased;
+}
+.wrap { max-width: 960px; margin: 0 auto; padding-inline: 24px; padding-block: 0 64px; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; text-underline-offset: 3px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+
+/* Nav */
+nav { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-block: 28px; flex-wrap: wrap; }
+.mark { font: 700 18px/1 var(--display); color: var(--fg); letter-spacing: -0.01em; }
+.navlinks { display: flex; gap: 20px; font-size: 14px; flex-wrap: wrap; }
+.navlinks a { color: var(--muted); }
+.navlinks a:hover { color: var(--fg); text-decoration: none; }
+
+/* Hero */
+.hero { display: grid; grid-template-columns: 1.25fr 1fr; gap: 48px; align-items: center; padding-block: 40px 72px; }
+.hero > * { min-width: 0; }
+.eyebrow { font: 500 12px/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 8px; }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: var(--warm); }
+h1 { font: 700 clamp(40px, 6.5vw, 64px)/1.02 var(--display); letter-spacing: -0.025em; margin: 18px 0 20px; text-wrap: balance; }
+.lede { font-size: 18px; color: var(--muted); max-width: 34em; margin: 0 0 28px; }
+.lede strong { color: var(--fg); font-weight: 500; }
+.ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 11px 18px; border-radius: 8px; font: 500 15px/1 var(--body); border: 1px solid var(--line); color: var(--fg); background: var(--surface); cursor: pointer; }
+.btn:hover { text-decoration: none; border-color: var(--muted); }
+.btn.primary { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.btn.primary:hover { opacity: 0.9; }
+
+.figure { margin: 0; }
+.map { width: 100%; aspect-ratio: 4 / 3; max-width: 100%; display: block; border-radius: 6px; border: 1px solid var(--line); background: var(--surface); }
+figcaption { display: flex; justify-content: space-between; gap: 12px; margin-top: 10px; font: 400 12px/1.4 var(--mono); color: var(--muted); flex-wrap: wrap; }
+.scale { display: flex; align-items: center; gap: 6px; }
+.scale i { width: 72px; height: 6px; border-radius: 3px; background: linear-gradient(90deg, var(--accent), var(--surface) 50%, var(--warm)); border: 1px solid var(--line); }
+
+/* Sections */
+section { padding-block: 56px; border-top: 1px solid var(--line); }
+.sec-head { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; margin-bottom: 28px; flex-wrap: wrap; }
+h2 { font: 700 28px/1.15 var(--display); letter-spacing: -0.015em; margin: 0; }
+.sec-note { color: var(--muted); font-size: 14px; }
+
+/* Work */
+.work { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 24px; display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.card-top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.card h3 { font: 700 22px/1.2 var(--display); margin: 0; letter-spacing: -0.01em; overflow-wrap: anywhere; }
+.role { font: 500 11px/1 var(--mono); text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); white-space: nowrap; }
+.card p { margin: 0; color: var(--muted); }
+.card p strong { color: var(--fg); font-weight: 500; }
+.meta { display: flex; gap: 8px; flex-wrap: wrap; margin-top: auto; padding-top: 6px; }
+.chip { font: 400 12px/1 var(--mono); padding: 6px 9px; border-radius: 5px; border: 1px solid var(--line); color: var(--muted); font-variant-numeric: tabular-nums; }
+.card-links { display: flex; gap: 18px; font-size: 14px; font-weight: 500; flex-wrap: wrap; }
+
+/* Research */
+.research { display: grid; grid-template-columns: 1fr 1.3fr; gap: 40px; }
+.research > * { min-width: 0; }
+.research p { margin: 0 0 14px; max-width: 36em; }
+.focus { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+.focus li { display: grid; grid-template-columns: 9.5em 1fr; gap: 16px; padding-block: 14px; border-bottom: 1px solid var(--line); }
+.focus li:first-child { padding-top: 0; }
+.focus b { font: 500 13px/1.5 var(--mono); color: var(--fg); }
+.focus span { color: var(--muted); font-size: 15px; }
+
+/* Experience */
+.timeline { display: grid; gap: 0; }
+.row { display: grid; grid-template-columns: 9.5em 1fr; gap: 16px; padding-block: 18px; border-bottom: 1px solid var(--line); }
+.row:first-child { padding-top: 0; }
+.when { font: 400 13px/1.6 var(--mono); color: var(--muted); font-variant-numeric: tabular-nums; }
+.row h4 { margin: 0 0 4px; font: 600 16px/1.4 var(--body); }
+.row p { margin: 0; color: var(--muted); max-width: 40em; }
+
+/* Contact */
+.contact { display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; }
+.contact p { margin: 0; color: var(--muted); max-width: 30em; }
+.email { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.email code { font: 500 15px/1 var(--mono); padding: 12px 14px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); user-select: all; overflow-wrap: anywhere; }
+footer { padding-top: 40px; font: 400 12px/1 var(--mono); color: var(--muted); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+
+@media (max-width: 760px) {
+  .wrap { padding-inline: 16px; }
+  .hero { grid-template-columns: 1fr; gap: 32px; padding-block: 16px 48px; }
+  .work, .research { grid-template-columns: 1fr; }
+  .focus li, .row { grid-template-columns: 1fr; gap: 4px; }
+  .navlinks { gap: 14px; }
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <nav>
+    <span class="mark">Franz Motzkus</span>
+    <div class="navlinks">
+      <a href="#work">Work</a>
+      <a href="#research">Research</a>
+      <a href="#experience">Experience</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div>
+      <div class="eyebrow"><span class="dot"></span>Applied AI · Berlin</div>
+      <h1>I make vision models explain themselves.</h1>
+      <p class="lede">Applied AI engineer and PhD researcher in <strong>explainable AI</strong>. I build concept-based explanations for deep learning models in <strong>autonomous driving</strong>, and I take research methods into systems teams can actually use.</p>
+      <div class="ctas">
+        <a class="btn primary" href="#work">See my work</a>
+        <a class="btn" href="https://github.com/3-nan">GitHub</a>
+        <!-- TODO: add LinkedIn / CV links -->
+        <!-- <a class="btn" href="https://www.linkedin.com/in/YOUR-HANDLE">LinkedIn</a> -->
+        <!-- <a class="btn" href="cv.pdf">CV</a> -->
+      </div>
+    </div>
+    <figure class="figure">
+      <canvas class="map" id="map" aria-label="Animated concept relevance map over a 16 by 12 grid of image patches"></canvas>
+      <figcaption>
+        <span>concept: pedestrian · patch relevance</span>
+        <span class="scale">−1 <i></i> +1</span>
+      </figcaption>
+    </figure>
+  </header>
+
+  <section id="work">
+    <div class="sec-head">
+      <h2>Selected work</h2>
+      <span class="sec-note">Pinned on GitHub</span>
+    </div>
+    <div class="work">
+      <article class="card">
+        <div class="card-top"><h3>Quantus</h3><span class="role">Contributor</span></div>
+        <p>Open-source toolkit for <strong>evaluating neural network explanations</strong>. It measures whether attribution methods are faithful, robust and localized, so teams can choose an XAI method on evidence instead of how good the heatmap looks.</p>
+        <div class="meta">
+          <span class="chip">Python</span>
+          <span class="chip">PyTorch · TensorFlow</span>
+          <span class="chip">670+ ★</span>
+          <span class="chip">90+ forks</span>
+        </div>
+        <div class="card-links">
+          <a href="https://github.com/understandable-machine-intelligence-lab/Quantus">Repository ↗</a>
+        </div>
+      </article>
+      <article class="card">
+        <div class="card-top"><h3>diffusion_counterfactuals</h3><span class="role">Author</span></div>
+        <p>Visual counterfactuals for image classifiers with latent diffusion. Extends LDCE with <strong>concept-restricted gradient guidance</strong> and <strong>localized diffusion</strong>, so an edit changes only the concept that drives the decision.</p>
+        <div class="meta">
+          <span class="chip">Python</span>
+          <span class="chip">Diffusers · CLIP</span>
+          <span class="chip">Docker</span>
+        </div>
+        <div class="card-links">
+          <a href="https://github.com/3-nan/diffusion_counterfactuals">Repository ↗</a>
+          <a href="https://arxiv.org/abs/2310.06668">LDCE paper ↗</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="research">
+    <div class="sec-head"><h2>Research</h2></div>
+    <div class="research">
+      <div>
+        <p>Pixel heatmaps show <em>where</em> a model looks. They rarely say <em>what</em> it recognized. My PhD works at the level of human concepts, such as pedestrian, lane marking or occlusion, so engineers and safety reviewers can check a perception model in their own terms.</p>
+        <!-- TODO: add publications, e.g.
+        <p><a href="#">Paper title</a> · Venue 2025</p> -->
+      </div>
+      <ul class="focus">
+        <li><b>Concept attribution</b><span>Locating and quantifying human-interpretable concepts inside CNNs and vision transformers.</span></li>
+        <li><b>Counterfactuals</b><span>Minimal, concept-localized image edits that flip a classifier's decision.</span></li>
+        <li><b>XAI evaluation</b><span>Faithfulness, robustness and localization metrics for explanation methods.</span></li>
+        <li><b>Domain</b><span>Perception for autonomous driving: detection, segmentation, safety review.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="sec-head"><h2>Experience</h2></div>
+    <div class="timeline">
+      <div class="row">
+        <span class="when">until 2026</span>
+        <div><h4>AI R&amp;D Engineer · Aumovio</h4><p>Research and engineering on explainability for automotive perception models.</p></div>
+      </div>
+      <div class="row">
+        <span class="when">PhD</span>
+        <div><h4>Explainable AI for autonomous driving</h4><p>Concept-based explanations for deep vision models; thesis in final stage.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="contact">
+      <div>
+        <h2>Let's talk</h2>
+        <p style="margin-top:10px">Open to Applied AI Engineer, Forward Deployed Engineer and Solutions Architect roles in Berlin, remote or across the EU.</p>
+      </div>
+      <div class="email">
+        <code id="addr">franz.motzkus@gmail.com</code>
+        <button class="btn" id="copy" type="button">Copy</button>
+      </div>
+    </div>
+    <footer>
+      <span>© 2026 Franz Motzkus</span>
+      <a href="https://github.com/3-nan">github.com/3-nan</a>
+    </footer>
+  </section>
+</div>
+
+<script>
+(function () {
+  // Copy email
+  var btn = document.getElementById('copy');
+  var addr = document.getElementById('addr');
+  btn.addEventListener('click', function () {
+    var text = addr.textContent;
+    var done = function () { btn.textContent = 'Copied'; setTimeout(function () { btn.textContent = 'Copy'; }, 1600); };
+    var fallback = function () {
+      var r = document.createRange(); r.selectNodeContents(addr);
+      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+    };
+    try {
+      navigator.clipboard.writeText(text).then(done, fallback);
+    } catch (e) { fallback(); }
+  });
+
+  // Concept relevance map: a 16x12 patch grid with a drifting relevance field
+  var c = document.getElementById('map');
+  var ctx = c.getContext('2d');
+  var COLS = 16, ROWS = 12;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function token(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+  function hexToRgb(h) {
+    h = h.replace('#', '');
+    if (h.length === 3) h = h.split('').map(function (x) { return x + x; }).join('');
+    var n = parseInt(h, 16); return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+  }
+  function mix(a, b, t) { return [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t]; }
+
+  var colors;
+  function readColors() {
+    colors = { neg: hexToRgb(token('--accent')), pos: hexToRgb(token('--warm')), mid: hexToRgb(token('--surface')), line: token('--line') };
+  }
+  readColors();
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function () { readColors(); if (reduce) draw(0); });
+  new MutationObserver(function () { readColors(); if (reduce) draw(0); }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
+  function size() {
+    var r = c.getBoundingClientRect(), d = window.devicePixelRatio || 1;
+    c.width = Math.round(r.width * d); c.height = Math.round(r.height * d);
+  }
+
+  // relevance: a positive blob (the "pedestrian") that drifts, plus a weaker negative region
+  function field(x, y, t) {
+    var px = 0.62 + 0.08 * Math.sin(t * 0.35), py = 0.55 + 0.06 * Math.cos(t * 0.27);
+    var nx = 0.22 + 0.05 * Math.cos(t * 0.31), ny = 0.32 + 0.05 * Math.sin(t * 0.22);
+    var p = Math.exp(-(((x - px) / 0.13) ** 2 + ((y - py) / 0.22) ** 2));
+    var n = 0.55 * Math.exp(-(((x - nx) / 0.16) ** 2 + ((y - ny) / 0.14) ** 2));
+    var ripple = 0.08 * Math.sin(x * 9 + t * 0.6) * Math.cos(y * 7 - t * 0.4);
+    return Math.max(-1, Math.min(1, p - n + ripple));
+  }
+
+  function draw(t) {
+    var w = c.width, h = c.height, cw = w / COLS, ch = h / ROWS, gap = Math.max(1, Math.round((window.devicePixelRatio || 1)));
+    ctx.clearRect(0, 0, w, h);
+    for (var j = 0; j < ROWS; j++) {
+      for (var i = 0; i < COLS; i++) {
+        var v = field((i + 0.5) / COLS, (j + 0.5) / ROWS, t);
+        var rgb = v >= 0 ? mix(colors.mid, colors.pos, v) : mix(colors.mid, colors.neg, -v);
+        ctx.fillStyle = 'rgb(' + rgb.map(Math.round).join(',') + ')';
+        ctx.fillRect(i * cw + gap, j * ch + gap, cw - gap * 2, ch - gap * 2);
+      }
+    }
+  }
+
+  size(); draw(0);
+  window.addEventListener('resize', function () { size(); draw(performance.now() / 1000); });
+  if (!reduce) {
+    (function loop(ts) { draw(ts / 1000); requestAnimationFrame(loop); })(0);
+  }
+})();
+</script>
+</body>
+</html>
