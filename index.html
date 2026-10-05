@@ -18,6 +18,8 @@
   --line: #DDE0E7;
   --accent: #2F48C8;
   --warm: #D9891A;
+  --app: #1E9A68;
+  --phone: #14171F;
   --display: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
   --body: "IBM Plex Sans", -apple-system, "Segoe UI", Roboto, sans-serif;
   --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
@@ -25,12 +27,12 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --bg: #0F1117; --surface: #171A23; --fg: #E8EAF0; --muted: #9AA1B2;
-    --line: #2A2F3C; --accent: #8EA2FF; --warm: #F0A73A; color-scheme: dark;
+    --line: #2A2F3C; --accent: #8EA2FF; --warm: #F0A73A; --app: #4CC99A; --phone: #05060A; color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --bg: #0F1117; --surface: #171A23; --fg: #E8EAF0; --muted: #9AA1B2;
-  --line: #2A2F3C; --accent: #8EA2FF; --warm: #F0A73A; color-scheme: dark;
+  --line: #2A2F3C; --accent: #8EA2FF; --warm: #F0A73A; --app: #4CC99A; --phone: #05060A; color-scheme: dark;
 }
 * { box-sizing: border-box; }
 body {
@@ -79,14 +81,68 @@ h2 { font: 700 28px/1.15 var(--display); letter-spacing: -0.015em; margin: 0; }
 /* Work */
 .work { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 .card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 24px; display: flex; flex-direction: column; gap: 14px; min-width: 0; }
-.card-top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
-.card h3 { font: 700 22px/1.2 var(--display); margin: 0; letter-spacing: -0.01em; overflow-wrap: anywhere; }
+.card-top { display: flex; justify-content: space-between; align-items: baseline; gap: 6px 12px; flex-wrap: wrap; }
+.card h3 { font: 700 22px/1.2 var(--display); margin: 0; letter-spacing: -0.01em; overflow-wrap: break-word; min-width: 0; }
 .role { font: 500 11px/1 var(--mono); text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); white-space: nowrap; }
 .card p { margin: 0; color: var(--muted); }
 .card p strong { color: var(--fg); font-weight: 500; }
 .meta { display: flex; gap: 8px; flex-wrap: wrap; margin-top: auto; padding-top: 6px; }
 .chip { font: 400 12px/1 var(--mono); padding: 6px 9px; border-radius: 5px; border: 1px solid var(--line); color: var(--muted); font-variant-numeric: tabular-nums; }
 .card-links { display: flex; gap: 18px; font-size: 14px; font-weight: 500; flex-wrap: wrap; }
+
+/* Feature project (LifeDirector) */
+.feature { display: grid; grid-template-columns: 1.15fr 1fr; gap: 32px; align-items: center; padding: 32px; margin-bottom: 20px; }
+.feature > * { min-width: 0; }
+.feature .txt { display: flex; flex-direction: column; gap: 14px; }
+.feature h3 { font-size: 28px; }
+.status { display: inline-flex; align-items: center; gap: 6px; }
+.status::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--app); }
+.points { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; color: var(--muted); font-size: 15px; }
+.points li { display: grid; grid-template-columns: 18px 1fr; gap: 8px; }
+.points li::before { content: "✓"; color: var(--app); font-weight: 600; }
+.stage { display: flex; justify-content: center; align-items: center; position: relative; padding-block: 8px; }
+.stage::before { content: ""; position: absolute; inset: 10% 8%; border-radius: 50%; background: radial-gradient(closest-side, color-mix(in srgb, var(--app) 22%, transparent), transparent); }
+.phone { position: relative; width: 236px; max-width: 100%; border-radius: 34px; background: var(--phone); padding: 10px; box-shadow: 0 24px 48px -20px rgba(10, 14, 30, 0.45); }
+.screen { border-radius: 26px; background: #FBFCFB; color: #14171F; padding: 18px 16px 16px; display: flex; flex-direction: column; gap: 12px; font-family: var(--body); overflow: hidden; }
+.notch { width: 70px; height: 18px; border-radius: 10px; background: var(--phone); margin: -10px auto 2px; }
+.s-head { display: flex; justify-content: space-between; align-items: center; }
+.s-head small { font: 500 10px/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: #6A7180; }
+.s-head b { font: 700 17px/1.1 var(--display); display: block; margin-top: 4px; }
+.ring { --p: 75; width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; background: conic-gradient(#1E9A68 calc(var(--p) * 1%), #E3EAE6 0); }
+.ring span { width: 38px; height: 38px; border-radius: 50%; background: #FBFCFB; display: grid; place-items: center; font: 600 11px/1 var(--mono); font-variant-numeric: tabular-nums; }
+.week { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; text-align: center; font: 500 9px/1 var(--mono); color: #6A7180; }
+.week i { display: block; height: 22px; border-radius: 6px; background: #E3EAE6; margin-top: 4px; }
+.week i.on { background: #1E9A68; }
+.week i.today { background: #FBFCFB; box-shadow: inset 0 0 0 1.5px #1E9A68; }
+.habits { display: grid; gap: 6px; }
+.habit { display: grid; grid-template-columns: 20px 1fr auto; gap: 8px; align-items: center; padding: 8px 10px; border-radius: 10px; background: #F0F3F1; font-size: 12px; }
+.chk { width: 18px; height: 18px; border-radius: 6px; border: 1.5px solid #B9C3BE; display: grid; place-items: center; color: #fff; font-size: 11px; line-height: 1; }
+.habit.done .chk { background: #1E9A68; border-color: #1E9A68; }
+.habit.done span:nth-child(2) { color: #6A7180; text-decoration: line-through; }
+.habit em { font: 500 10px/1 var(--mono); font-style: normal; color: #6A7180; }
+.habit.new { background: #FFF4E2; }
+.habit.new em { color: #B26A00; }
+.toast { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 12px; background: #14171F; color: #FBFCFB; font-size: 11.5px; line-height: 1.35; }
+.toast b { display: block; font: 700 13px/1.2 var(--display); }
+.flame { width: 26px; height: 26px; border-radius: 8px; background: #D9891A; display: grid; place-items: center; font: 700 12px/1 var(--mono); flex: none; }
+@media (prefers-reduced-motion: no-preference) {
+  .toast { animation: rise 0.7s 0.4s both cubic-bezier(.2,.8,.2,1); }
+  @keyframes rise { from { transform: translateY(14px); opacity: 0.4; } to { transform: none; opacity: 1; } }
+}
+.mock-note { font: 400 11px/1.4 var(--mono); color: var(--muted); text-align: center; margin-top: 12px; }
+
+/* Publications */
+.pubs { list-style: none; margin: 0; padding: 0; }
+.pub { display: grid; grid-template-columns: 4.5em 1fr; gap: 16px; padding-block: 18px; border-bottom: 1px solid var(--line); }
+.pub:first-child { padding-top: 0; }
+.pub > * { min-width: 0; }
+.yr { font: 500 13px/1.6 var(--mono); color: var(--muted); font-variant-numeric: tabular-nums; }
+.pub h4 { margin: 0 0 4px; font: 600 16px/1.4 var(--body); text-wrap: balance; }
+.pub h4 a { color: var(--fg); }
+.pub h4 a:hover { color: var(--accent); }
+.pub p { margin: 0; color: var(--muted); font-size: 14px; }
+.venue { font: 500 12px/1 var(--mono); color: var(--accent); margin-left: 6px; white-space: nowrap; }
+.pubs-more { margin-top: 20px; font-size: 14px; font-weight: 500; }
 
 /* Research */
 .research { display: grid; grid-template-columns: 1fr 1.3fr; gap: 40px; }
@@ -116,7 +172,9 @@ footer { padding-top: 40px; font: 400 12px/1 var(--mono); color: var(--muted); d
 @media (max-width: 760px) {
   .wrap { padding-inline: 16px; }
   .hero { grid-template-columns: 1fr; gap: 32px; padding-block: 16px 48px; }
-  .work, .research { grid-template-columns: 1fr; }
+  .work, .research, .feature { grid-template-columns: 1fr; }
+  .feature { padding: 22px; }
+  .pub { grid-template-columns: 1fr; gap: 4px; }
   .focus li, .row { grid-template-columns: 1fr; gap: 4px; }
   .navlinks { gap: 14px; }
 }
@@ -128,8 +186,9 @@ footer { padding-top: 40px; font: 400 12px/1 var(--mono); color: var(--muted); d
   <nav>
     <span class="mark">Franz Motzkus</span>
     <div class="navlinks">
-      <a href="#work">Work</a>
+      <a href="#work">Projects</a>
       <a href="#research">Research</a>
+      <a href="#publications">Papers</a>
       <a href="#experience">Experience</a>
       <a href="#contact">Contact</a>
     </div>
@@ -143,8 +202,8 @@ footer { padding-top: 40px; font: 400 12px/1 var(--mono); color: var(--muted); d
       <div class="ctas">
         <a class="btn primary" href="#work">See my work</a>
         <a class="btn" href="https://github.com/3-nan">GitHub</a>
-        <!-- TODO: add LinkedIn / CV links -->
-        <a class="btn" href="www.linkedin.com/in/franz-motzkus-1804841a4">LinkedIn</a>
+        <a class="btn" href="https://www.linkedin.com/in/franz-motzkus-1804841a4">LinkedIn</a>
+        <!-- TODO: add CV link -->
         <!-- <a class="btn" href="cv.pdf">CV</a> -->
       </div>
     </div>
@@ -159,12 +218,57 @@ footer { padding-top: 40px; font: 400 12px/1 var(--mono); color: var(--muted); d
 
   <section id="work">
     <div class="sec-head">
-      <h2>Selected work</h2>
-      <span class="sec-note">Pinned on GitHub</span>
+      <h2>Projects</h2>
+      <span class="sec-note">Product, open source and research code</span>
     </div>
+
+    <article class="card feature">
+      <div class="txt">
+        <div class="card-top"><h3>LifeDirector</h3><span class="role status">In development</span></div>
+        <p>A mobile growth app that combines habit tracking with personal challenges across <strong>three timeframes</strong>: daily habits with flexible weekly targets, weekly tasks and monthly comfort-zone challenges. A momentum score <strong>rewards progress over perfection</strong>.</p>
+        <ul class="points">
+          <li>Momentum scoring instead of all-or-nothing streaks</li>
+          <li>Celebration animations and daily reminder notifications</li>
+          <li>Weekly review with analytics and hints to adjust targets</li>
+          <li>Anonymous sign-in, no account needed</li>
+        </ul>
+        <div class="meta">
+          <span class="chip">TypeScript</span>
+          <span class="chip">React Native · Expo</span>
+          <span class="chip">Supabase · Postgres</span>
+          <span class="chip">EAS</span>
+        </div>
+        <div class="card-links"><a href="https://github.com/3-nan/lifedirector">Repository ↗</a></div>
+      </div>
+      <div>
+        <div class="stage" aria-hidden="true">
+          <div class="phone">
+            <div class="screen">
+              <div class="notch"></div>
+              <div class="s-head">
+                <div><small>Today · Momentum</small><b>Good morning</b></div>
+                <div class="ring" style="--p:82" title="Momentum"><span>82</span></div>
+              </div>
+              <div class="week">
+                <div>M<i class="today"></i></div><div>T<i class="on"></i></div><div>W<i class="on"></i></div><div>T<i class="on"></i></div><div>F<i class="on"></i></div><div>S<i class="on"></i></div><div>S<i class="on"></i></div>
+              </div>
+              <div class="habits">
+                <div class="habit done"><span class="chk">✓</span><span>Gym session</span><em>3/4 wk</em></div>
+                <div class="habit done"><span class="chk">✓</span><span>Read 20 pages</span><em>5/5 wk</em></div>
+                <div class="habit"><span class="chk"></span><span>Plan next week</span><em>task</em></div>
+                <div class="habit new"><span class="chk"></span><span>Monthly: first open mic</span><em>2/4</em></div>
+              </div>
+              <div class="toast"><span class="flame">+6</span><div><b>Weekly target hit</b>Reading 5 of 5. Momentum is up.</div></div>
+            </div>
+          </div>
+        </div>
+        <p class="mock-note">Illustrative UI</p>
+      </div>
+    </article>
+
     <div class="work">
       <article class="card">
-        <div class="card-top"><h3>Quantus</h3><span class="role">Contributor</span></div>
+        <div class="card-top"><h3>Quantus</h3><span class="role">Co-author</span></div>
         <p>Open-source toolkit for <strong>evaluating neural network explanations</strong>. It measures whether attribution methods are faithful, robust and localized, so teams can choose an XAI method on evidence instead of how good the heatmap looks.</p>
         <div class="meta">
           <span class="chip">Python</span>
@@ -174,10 +278,11 @@ footer { padding-top: 40px; font: 400 12px/1 var(--mono); color: var(--muted); d
         </div>
         <div class="card-links">
           <a href="https://github.com/understandable-machine-intelligence-lab/Quantus">Repository ↗</a>
+          <a href="https://arxiv.org/abs/2202.06861">JMLR paper ↗</a>
         </div>
       </article>
       <article class="card">
-        <div class="card-top"><h3>diffusion_counterfactuals</h3><span class="role">Author</span></div>
+        <div class="card-top"><h3>diffusion_<wbr>counterfactuals</h3><span class="role">Author</span></div>
         <p>Visual counterfactuals for image classifiers with latent diffusion. Extends LDCE with <strong>concept-restricted gradient guidance</strong> and <strong>localized diffusion</strong>, so an edit changes only the concept that drives the decision.</p>
         <div class="meta">
           <span class="chip">Python</span>
@@ -186,7 +291,7 @@ footer { padding-top: 40px; font: 400 12px/1 var(--mono); color: var(--muted); d
         </div>
         <div class="card-links">
           <a href="https://github.com/3-nan/diffusion_counterfactuals">Repository ↗</a>
-          <a href="https://arxiv.org/abs/2310.06668">LDCE paper ↗</a>
+          <a href="https://arxiv.org/abs/2406.01649">CoLa-DCE paper ↗</a>
         </div>
       </article>
     </div>
@@ -197,8 +302,6 @@ footer { padding-top: 40px; font: 400 12px/1 var(--mono); color: var(--muted); d
     <div class="research">
       <div>
         <p>Pixel heatmaps show <em>where</em> a model looks. They rarely say <em>what</em> it recognized. My PhD works at the level of human concepts, such as pedestrian, lane marking or occlusion, so engineers and safety reviewers can check a perception model in their own terms.</p>
-        <!-- TODO: add publications, e.g.
-        <p><a href="#">Paper title</a> · Venue 2025</p> -->
       </div>
       <ul class="focus">
         <li><b>Concept attribution</b><span>Locating and quantifying human-interpretable concepts inside CNNs and vision transformers.</span></li>
@@ -207,6 +310,46 @@ footer { padding-top: 40px; font: 400 12px/1 var(--mono); color: var(--muted); d
         <li><b>Domain</b><span>Perception for autonomous driving: detection, segmentation, safety review.</span></li>
       </ul>
     </div>
+  </section>
+
+  <section id="publications">
+    <div class="sec-head">
+      <h2>Publications</h2>
+      <span class="sec-note">Peer-reviewed and preprints</span>
+    </div>
+    <ul class="pubs">
+      <li class="pub">
+        <span class="yr">2025</span>
+        <div><h4>Concepts Guide and Explain Diffusion Visual Counterfactuals</h4>
+        <p>F. Motzkus, U. Schmid <span class="venue">xAI 2025 · Late-breaking work</span></p></div>
+      </li>
+      <li class="pub">
+        <span class="yr">2024</span>
+        <div><h4><a href="https://arxiv.org/abs/2403.16782">Unveiling the Anatomy of Adversarial Attacks: Concept-Based XAI Dissection of CNNs</a></h4>
+        <p>with G. Mikriukov, G. Schwalbe, K. Bade <span class="venue">xAI 2024</span></p></div>
+      </li>
+      <li class="pub">
+        <span class="yr">2024</span>
+        <div><h4><a href="https://arxiv.org/abs/2405.17523">Locally Testing Model Detections for Semantic Global Concepts</a></h4>
+        <p>with G. Mikriukov, C. Hellert, U. Schmid <span class="venue">xAI 2024</span></p></div>
+      </li>
+      <li class="pub">
+        <span class="yr">2024</span>
+        <div><h4><a href="https://arxiv.org/abs/2406.01649">CoLa-DCE: Concept-guided Latent Diffusion Counterfactual Explanations</a></h4>
+        <p>F. Motzkus et al. <span class="venue">arXiv preprint</span></p></div>
+      </li>
+      <li class="pub">
+        <span class="yr">2023</span>
+        <div><h4><a href="https://arxiv.org/abs/2202.06861">Quantus: An Explainable AI Toolkit for Responsible Evaluation of Neural Network Explanations and Beyond</a></h4>
+        <p>Co-author <span class="venue">JMLR 24</span></p></div>
+      </li>
+      <li class="pub">
+        <span class="yr">2022</span>
+        <div><h4><a href="https://arxiv.org/abs/2202.06621">Measurably Stronger Explanation Reliability via Model Canonization</a></h4>
+        <p>with L. Weber, S. Lapuschkin <span class="venue">ICIP 2022</span></p></div>
+      </li>
+    </ul>
+    <div class="pubs-more"><a href="https://dblp.org/pid/313/9841">All publications on dblp ↗</a></div>
   </section>
 
   <section id="experience">
@@ -236,7 +379,7 @@ footer { padding-top: 40px; font: 400 12px/1 var(--mono); color: var(--muted); d
     </div>
     <footer>
       <span>© 2026 Franz Motzkus</span>
-      <a href="https://github.com/3-nan">github.com/3-nan</a>
+      <span style="display:flex;gap:16px;flex-wrap:wrap"><a href="https://www.linkedin.com/in/franz-motzkus-1804841a4">LinkedIn</a><a href="https://github.com/3-nan">github.com/3-nan</a></span>
     </footer>
   </section>
 </div>
