@@ -161,6 +161,10 @@ h2 { font: 700 28px/1.15 var(--display); letter-spacing: -0.015em; margin: 0; }
 .when { font: 400 13px/1.6 var(--mono); color: var(--muted); font-variant-numeric: tabular-nums; }
 .row h4 { margin: 0 0 4px; font: 600 16px/1.4 var(--body); }
 .row p { margin: 0; color: var(--muted); max-width: 40em; }
+.row h4:only-child { margin: 0; }
+.duties { margin: 6px 0 0; padding-left: 18px; color: var(--muted); max-width: 44em; display: grid; gap: 4px; }
+.duties li::marker { color: var(--accent); }
+.subhead { font: 700 20px/1.2 var(--display); letter-spacing: -0.01em; margin: 40px 0 20px; }
 
 /* Contact */
 .contact { display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; }
@@ -346,7 +350,7 @@ footer { padding-top: 40px; font: 400 12px/1 var(--mono); color: var(--muted); d
       <li class="pub">
         <span class="yr">2024</span>
         <div><h4><a href="https://arxiv.org/abs/2405.17523">Locally Testing Model Detections for Semantic Global Concepts</a></h4>
-        <p>with G. Mikriukov, C. Hellert, U. Schmid <span class="venue">xAI 2024</span></p></div>
+        <p>F. Motzkus, G. Mikriukov, C. Hellert, U. Schmid <span class="venue">xAI 2024</span></p></div>
       </li>
       <li class="pub">
         <span class="yr">2024</span>
@@ -356,12 +360,12 @@ footer { padding-top: 40px; font: 400 12px/1 var(--mono); color: var(--muted); d
       <li class="pub">
         <span class="yr">2023</span>
         <div><h4><a href="https://arxiv.org/abs/2202.06861">Quantus: An Explainable AI Toolkit for Responsible Evaluation of Neural Network Explanations and Beyond</a></h4>
-        <p>Co-author <span class="venue">JMLR 24</span></p></div>
+        <p>A. Hedström, …, F. Motzkus, et al. <span class="venue">JMLR 24</span></p></div>
       </li>
       <li class="pub">
         <span class="yr">2022</span>
         <div><h4><a href="https://arxiv.org/abs/2202.06621">Measurably Stronger Explanation Reliability via Model Canonization</a></h4>
-        <p>with L. Weber, S. Lapuschkin <span class="venue">ICIP 2022</span></p></div>
+        <p>F. Motzkus, L. Weber, S. Lapuschkin <span class="venue">ICIP 2022</span></p></div>
       </li>
     </ul>
     <div class="pubs-more"><a href="https://dblp.org/pid/313/9841">All publications on dblp ↗</a></div>
@@ -371,12 +375,53 @@ footer { padding-top: 40px; font: 400 12px/1 var(--mono); color: var(--muted); d
     <div class="sec-head"><h2>Experience</h2></div>
     <div class="timeline">
       <div class="row">
-        <span class="when">until 2026</span>
-        <div><h4>AI R&amp;D Engineer · Aumovio</h4><p>Research and engineering on explainability for automotive perception models.</p></div>
+        <span class="when">2022 – 2026</span>
+        <div><h4>AI R&amp;D Engineer (PhD candidate) · AUMOVIO</h4>
+        <ul class="duties">
+          <li>Developed interpretable AI solutions to improve state-of-the-art autonomous driving models</li>
+          <li>Gathered requirements from cross-functional stakeholders to turn research into product use cases</li>
+          <li>Gave internal and external demos up to C-level, politics and media</li>
+          <li>Published at international AI conferences; supervised master students and interns</li>
+        </ul></div>
       </div>
       <div class="row">
-        <span class="when">PhD</span>
-        <div><h4>Explainable AI for autonomous driving</h4><p>Concept-based explanations for deep vision models; thesis in final stage.</p></div>
+        <span class="when">2020 – 2022</span>
+        <div><h4>Research Scientist · Fraunhofer HHI</h4>
+        <ul class="duties">
+          <li>Researched how to evaluate and compare explainable AI methods</li>
+          <li>Co-created the highly cited Quantus toolbox; published scientific papers</li>
+        </ul></div>
+      </div>
+      <div class="row">
+        <span class="when">2018 – 2019</span>
+        <div><h4>Software Developer (working student) · Carmeq GmbH</h4>
+        <ul class="duties">
+          <li>Built a Django web app for internal customers in an agile team</li>
+          <li>Defined and prioritized requirements with product owners and customers; ran sprint planning and backlog refinement</li>
+        </ul></div>
+      </div>
+      <div class="row">
+        <span class="when">2018</span>
+        <div><h4>Student Research Assistant · Bayer Business Services</h4>
+        <ul class="duties">
+          <li>Developed deep learning solutions for medical image analysis and proposed new product features</li>
+        </ul></div>
+      </div>
+    </div>
+
+    <h3 class="subhead">Education</h3>
+    <div class="timeline">
+      <div class="row">
+        <span class="when">2022 – now</span>
+        <div><h4>PhD, Applied Computer Science · University of Bamberg</h4><p>Thesis: Concept-based Explanations for AI in Autonomous Driving.</p></div>
+      </div>
+      <div class="row">
+        <span class="when">2018 – 2021</span>
+        <div><h4>M.Sc. Computer Science · TU Berlin</h4><p>Focus on cognitive systems (AI). Grade 1.2. Erasmus+ semester at the University of Helsinki (2019).</p></div>
+      </div>
+      <div class="row">
+        <span class="when">2014 – 2018</span>
+        <div><h4>B.Sc. Computer Science · TU Berlin</h4></div>
       </div>
     </div>
   </section>
