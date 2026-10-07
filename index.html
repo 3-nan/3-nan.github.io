@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-/* Layout: single narrow column, hero = statement + live concept-relevance map, then work, research, experience, contact */
+/* Layout: single narrow column, hero = statement + interactive counterfactual viewer from my research, then work, research, experience, contact */
 :root {
   --bg: #F5F6F8;
   --surface: #FFFFFF;
@@ -53,7 +53,7 @@ nav { display: flex; justify-content: space-between; align-items: center; gap: 1
 .navlinks a:hover { color: var(--fg); text-decoration: none; }
 
 /* Hero */
-.hero { display: grid; grid-template-columns: 1.25fr 1fr; gap: 48px; align-items: center; padding-block: 40px 72px; }
+.hero { display: grid; grid-template-columns: 1fr 1.15fr; gap: 48px; align-items: center; padding-block: 40px 72px; }
 .hero > * { min-width: 0; }
 .eyebrow { font: 500 12px/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 8px; }
 .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--warm); }
@@ -89,6 +89,45 @@ h2 { font: 700 28px/1.15 var(--display); letter-spacing: -0.015em; margin: 0; }
 .meta { display: flex; gap: 8px; flex-wrap: wrap; margin-top: auto; padding-top: 6px; }
 .chip { font: 400 12px/1 var(--mono); padding: 6px 9px; border-radius: 5px; border: 1px solid var(--line); color: var(--muted); font-variant-numeric: tabular-nums; }
 .card-links { display: flex; gap: 18px; font-size: 14px; font-weight: 500; flex-wrap: wrap; }
+
+/* Counterfactual lab (hero) — a fixed dark viewer in both themes */
+.lab { margin: 0; background: #0D0F14; border: 1px solid #232733; border-radius: 14px; padding: 10px; color: #E8EAF0; box-shadow: 0 30px 60px -30px rgba(15, 20, 40, 0.55); min-width: 0; }
+.lab-bar { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 4px 6px 10px; flex-wrap: wrap; }
+.lab-title { font: 500 11px/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: #9AA1B2; }
+.lab-tabs { display: flex; gap: 4px; flex-wrap: wrap; }
+.lab-tabs button { font: 500 12px/1 var(--mono); color: #9AA1B2; background: transparent; border: 1px solid #2A2F3C; border-radius: 999px; padding: 6px 10px; cursor: pointer; }
+.lab-tabs button:hover { color: #E8EAF0; border-color: #4A5161; }
+.lab-tabs button[aria-selected="true"] { background: #E8EAF0; color: #0D0F14; border-color: #E8EAF0; }
+.stage { position: relative; aspect-ratio: 600 / 422; max-width: 100%; border-radius: 8px; overflow: hidden; background: #000; user-select: none; touch-action: pan-y; }
+.stage img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 40%; display: block; }
+.stage .hm { mix-blend-mode: screen; opacity: 0; transition: opacity 0.35s ease; }
+.stage.maps .hm { opacity: 0.9; }
+.stage.maps .ph { filter: grayscale(0.85) brightness(0.55); }
+.stage .ph { transition: filter 0.35s ease; }
+.cfwrap { position: absolute; inset: 0; clip-path: inset(0 0 0 var(--x, 50%)); }
+.handle { position: absolute; top: 0; bottom: 0; left: var(--x, 50%); width: 2px; margin-left: -1px; background: #F0A73A; box-shadow: 0 0 18px rgba(240, 167, 58, 0.8); pointer-events: none; }
+.handle span { position: absolute; top: 50%; left: 50%; width: 34px; height: 34px; margin: -17px 0 0 -17px; border-radius: 50%; background: #F0A73A; box-shadow: 0 4px 14px rgba(0,0,0,0.5); }
+.handle span::before, .handle span::after { content: ""; position: absolute; top: 12px; border: 5px solid transparent; }
+.handle span::before { left: 4px; border-right-color: #0D0F14; }
+.handle span::after { right: 4px; border-left-color: #0D0F14; }
+.tag { position: absolute; bottom: 10px; max-width: 46%; padding: 7px 9px; border-radius: 6px; background: rgba(13, 15, 20, 0.78); backdrop-filter: blur(4px); pointer-events: none; display: flex; flex-direction: column; gap: 3px; }
+.tag.left { left: 10px; }
+.tag.right { right: 10px; text-align: right; }
+.tag i { font: 500 9.5px/1 var(--mono); font-style: normal; letter-spacing: 0.08em; text-transform: uppercase; color: #9AA1B2; }
+.tag b { font: 600 12.5px/1.25 var(--body); color: #FFFFFF; }
+.tag.right i { color: #F0A73A; }
+.slider { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: ew-resize; }
+.slider:focus-visible + .x, .stage:has(.slider:focus-visible) { outline: 2px solid #F0A73A; outline-offset: 2px; }
+.lab-foot { display: flex; justify-content: space-between; align-items: center; gap: 8px 16px; padding: 10px 6px 4px; font: 400 12px/1.45 var(--body); color: #9AA1B2; flex-wrap: wrap; }
+.lab-foot span { min-width: 0; flex: 1 1 220px; }
+.toggle { display: inline-flex; align-items: center; gap: 6px; font: 500 12px/1 var(--mono); color: #E8EAF0; cursor: pointer; white-space: nowrap; }
+.toggle input { accent-color: #F0A73A; margin: 0; }
+.lab-foot a { color: #F0A73A; white-space: nowrap; }
+.toggle.off { opacity: 0.35; pointer-events: none; }
+
+/* Figures (paper figures sit on white plates in both themes) */
+.plate { background: #FFFFFF; border: 1px solid var(--line); border-radius: 8px; padding: 12px; display: flex; align-items: center; justify-content: center; }
+.plate img { display: block; width: 100%; height: auto; max-width: 100%; }
 
 /* Feature project (LifeDirector) */
 .feature { display: grid; grid-template-columns: 1.15fr 1fr; gap: 32px; align-items: center; padding: 32px; margin-bottom: 20px; }
@@ -211,11 +250,31 @@ footer { padding-top: 40px; font: 400 12px/1 var(--mono); color: var(--muted); d
         <!-- <a class="btn" href="cv.pdf">CV</a> -->
       </div>
     </div>
-    <figure class="figure">
-      <canvas class="map" id="map" aria-label="Animated concept relevance map over a 16 by 12 grid of image patches"></canvas>
-      <figcaption>
-        <span>concept: pedestrian · patch relevance</span>
-        <span class="scale">−1 <i></i> +1</span>
+    <figure class="lab" id="lab">
+      <div class="lab-bar">
+        <span class="lab-title">Concept-guided counterfactuals</span>
+        <div class="lab-tabs" role="tablist" aria-label="Examples">
+          <button type="button" role="tab" data-ex="0" aria-selected="true">SUV</button>
+          <button type="button" role="tab" data-ex="1" aria-selected="false">Wagon</button>
+          <button type="button" role="tab" data-ex="2" aria-selected="false">Bird</button>
+          <button type="button" role="tab" data-ex="3" aria-selected="false">Dog</button>
+        </div>
+      </div>
+      <div class="stage" id="stage">
+        <img class="ph orig" id="imOrig" src="img/cf/jeep-orig.webp" alt="">
+        <img class="hm orig" id="hmOrig" src="img/cf/jeep-orig-map.webp" alt="">
+        <div class="cfwrap" id="cfwrap">
+          <img class="ph" id="imCf" src="img/cf/jeep-cf.webp" alt="">
+          <img class="hm" id="hmCf" src="img/cf/jeep-cf-map.webp" alt="">
+        </div>
+        <div class="handle" id="handle" aria-hidden="true"><span></span></div>
+        <span class="tag left"><i>Classifier says</i><b id="lbOrig">Jeep Patriot SUV 2012</b></span>
+        <span class="tag right"><i>Counterfactual</i><b id="lbCf">Ford Ranger SuperCab 2011</b></span>
+        <input class="slider" id="slider" type="range" min="0" max="100" value="50" aria-label="Compare original and counterfactual">
+      </div>
+      <figcaption class="lab-foot">
+        <span>Drag to compare. The diffusion model edits only the concepts the classifier relies on. <a href="https://arxiv.org/abs/2406.01649">CoLa-DCE ↗</a></span>
+        <label class="toggle" id="mapToggle"><input type="checkbox" id="showMap"> Show explanation</label>
       </figcaption>
     </figure>
   </header>
@@ -461,61 +520,62 @@ footer { padding-top: 40px; font: 400 12px/1 var(--mono); color: var(--muted); d
     } catch (e) { fallback(); }
   });
 
-  // Concept relevance map: a 16x12 patch grid with a drifting relevance field
-  var c = document.getElementById('map');
-  var ctx = c.getContext('2d');
-  var COLS = 16, ROWS = 12;
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  function token(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
-  function hexToRgb(h) {
-    h = h.replace('#', '');
-    if (h.length === 3) h = h.split('').map(function (x) { return x + x; }).join('');
-    var n = parseInt(h, 16); return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
-  }
-  function mix(a, b, t) { return [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t]; }
-
-  var colors;
-  function readColors() {
-    colors = { neg: hexToRgb(token('--accent')), pos: hexToRgb(token('--warm')), mid: hexToRgb(token('--surface')), line: token('--line') };
-  }
-  readColors();
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function () { readColors(); if (reduce) draw(0); });
-  new MutationObserver(function () { readColors(); if (reduce) draw(0); }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-
-  function size() {
-    var r = c.getBoundingClientRect(), d = window.devicePixelRatio || 1;
-    c.width = Math.round(r.width * d); c.height = Math.round(r.height * d);
-  }
-
-  // relevance: a positive blob (the "pedestrian") that drifts, plus a weaker negative region
-  function field(x, y, t) {
-    var px = 0.62 + 0.08 * Math.sin(t * 0.35), py = 0.55 + 0.06 * Math.cos(t * 0.27);
-    var nx = 0.22 + 0.05 * Math.cos(t * 0.31), ny = 0.32 + 0.05 * Math.sin(t * 0.22);
-    var p = Math.exp(-(((x - px) / 0.13) ** 2 + ((y - py) / 0.22) ** 2));
-    var n = 0.55 * Math.exp(-(((x - nx) / 0.16) ** 2 + ((y - ny) / 0.14) ** 2));
-    var ripple = 0.08 * Math.sin(x * 9 + t * 0.6) * Math.cos(y * 7 - t * 0.4);
-    return Math.max(-1, Math.min(1, p - n + ripple));
-  }
-
-  function draw(t) {
-    var w = c.width, h = c.height, cw = w / COLS, ch = h / ROWS, gap = Math.max(1, Math.round((window.devicePixelRatio || 1)));
-    ctx.clearRect(0, 0, w, h);
-    for (var j = 0; j < ROWS; j++) {
-      for (var i = 0; i < COLS; i++) {
-        var v = field((i + 0.5) / COLS, (j + 0.5) / ROWS, t);
-        var rgb = v >= 0 ? mix(colors.mid, colors.pos, v) : mix(colors.mid, colors.neg, -v);
-        ctx.fillStyle = 'rgb(' + rgb.map(Math.round).join(',') + ')';
-        ctx.fillRect(i * cw + gap, j * ch + gap, cw - gap * 2, ch - gap * 2);
+  // Counterfactual viewer
+  var EX = [
+    { k: 'jeep', o: 'Jeep Patriot SUV 2012', c: 'Ford Ranger SuperCab 2011', map: true },
+    { k: 'dodge', o: 'Dodge Caliber Wagon 2012', c: 'Dodge Journey SUV 2012', map: true },
+    { k: 'bird', o: 'Rusty Blackbird', c: 'Yellow-headed Blackbird', map: false },
+    { k: 'dog', o: 'American Bulldog', c: 'Boxer', map: false }
+  ];
+  var stage = document.getElementById('stage'), slider = document.getElementById('slider');
+  var showMap = document.getElementById('showMap'), mapToggle = document.getElementById('mapToggle');
+  var tabs = document.querySelectorAll('.lab-tabs button');
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var anim = null;
+  function setX(v) { stage.style.setProperty('--x', v + '%'); slider.value = v; }
+  function sweep() {
+    if (reduceMotion) { setX(50); return; }
+    cancelAnimationFrame(anim);
+    var keys = [[0, 50], [700, 12], [1600, 88], [2400, 50]], t0 = null;
+    function ease(t) { return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; }
+    function step(ts) {
+      if (t0 === null) t0 = ts;
+      var t = ts - t0;
+      for (var i = 1; i < keys.length; i++) {
+        if (t <= keys[i][0]) {
+          var a = keys[i - 1], z = keys[i], p = ease((t - a[0]) / (z[0] - a[0]));
+          setX(a[1] + (z[1] - a[1]) * p); anim = requestAnimationFrame(step); return;
+        }
       }
+      setX(50);
     }
+    anim = requestAnimationFrame(step);
   }
-
-  size(); draw(0);
-  window.addEventListener('resize', function () { size(); draw(performance.now() / 1000); });
-  if (!reduce) {
-    (function loop(ts) { draw(ts / 1000); requestAnimationFrame(loop); })(0);
+  function load(i) {
+    var e = EX[i], p = 'img/cf/' + e.k;
+    document.getElementById('imOrig').src = p + '-orig.webp';
+    document.getElementById('imCf').src = p + '-cf.webp';
+    document.getElementById('lbOrig').textContent = e.o;
+    document.getElementById('lbCf').textContent = e.c;
+    if (e.map) {
+      document.getElementById('hmOrig').src = p + '-orig-map.webp';
+      document.getElementById('hmCf').src = p + '-cf-map.webp';
+    }
+    mapToggle.classList.toggle('off', !e.map);
+    showMap.disabled = !e.map;
+    stage.classList.toggle('maps', e.map && showMap.checked);
+    tabs.forEach(function (t, j) { t.setAttribute('aria-selected', j === i ? 'true' : 'false'); });
+    stage.setAttribute('aria-label', 'Original: ' + e.o + '. Counterfactual: ' + e.c + '.');
+    sweep();
   }
+  tabs.forEach(function (t) { t.addEventListener('click', function () { load(+t.dataset.ex); }); });
+  slider.addEventListener('input', function () { cancelAnimationFrame(anim); setX(+slider.value); });
+  slider.addEventListener('pointerdown', function () { cancelAnimationFrame(anim); });
+  showMap.addEventListener('change', function () { stage.classList.toggle('maps', showMap.checked); });
+  // preload all pairs
+  EX.forEach(function (e) { ['-orig', '-cf'].concat(e.map ? ['-orig-map', '-cf-map'] : []).forEach(function (s) { var im = new Image(); im.src = 'img/cf/' + e.k + s + '.webp'; }); });
+  load(0);
 })();
 </script>
 </body>
